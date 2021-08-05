@@ -52,4 +52,10 @@ void Auto_Hanoi(HANOI* Hanoi, int N, int Start, int To, int Via);
 
 void Auto_Stack_Hanoi(HANOI* Hanoi);
 
+int Hint_Hanoi(HANOI* Hanoi, int auto_list[]);
+
+inline void Set_Auto_List(int Max, int auto_list[]);
+
+inline int Find_Loc(HANOI* Hanoi, int loc1);
+
 #endif //HANOI_H
