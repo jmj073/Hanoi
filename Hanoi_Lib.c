@@ -2,15 +2,15 @@
 
 #define GET_TOP(i) Stack[i][Top[i]]
 
-//¿øÆÇ °³¼ö ÀÔ·Â¹Ş±â
+//ì›íŒ ê°œìˆ˜ ì…ë ¥ë°›ê¸°
 void Input_Disk(HANOI* Hanoi) {
 	int n;
 	while (1) {
-		printf("¸î°³ÀÇ ¿øÆÇÀ» »ç¿ëÇÏ½Ã°Ú½À´Ï±î? (%d~%d)\nÀÔ·Â:", MIN_DISK, MaxDisk - 1);
+		printf("ëª‡ê°œì˜ ì›íŒì„ ì‚¬ìš©í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (%d~%d)\nì…ë ¥:", MIN_DISK, MaxDisk - 1);
 		scanf("%d", &n), getchar();
 		if (MIN_DISK <= n && n < MaxDisk)
 			break;
-		printf("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù(%d)\n", n);
+		printf("ì˜ëª»ëœ ê°’ì„ ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤(%d)\n", n);
 		getchar();
 		system("cls");
 	}
@@ -18,7 +18,7 @@ void Input_Disk(HANOI* Hanoi) {
 	Set_Disk(Hanoi);
 }
 
-// ¿øÆÇ ¼¼ÆÃ
+// ì›íŒ ì„¸íŒ…
 static void Set_Disk(HANOI* Hanoi) {
 	int i;
 	int(*Stack)[MaxDisk] = Hanoi->Stack;
@@ -27,7 +27,7 @@ static void Set_Disk(HANOI* Hanoi) {
 		Stack[1][++Top[1]] = i;
 }
 
-//¸ŞÀÎ ÇÏ³ëÀÌ
+//ë©”ì¸ í•˜ë…¸ì´
 clock_t Hanoi_Main() {
 	HANOI Hanoi = { 0 };
 	int Max;
@@ -38,7 +38,7 @@ clock_t Hanoi_Main() {
 	clock_t time_score = 0;
 	int auto_list[11] = { 0, };
 
-	printf("1.ÇÃ·¹ÀÌ 2.ÀÚµ¿\nÀÔ·Â:");
+	printf("1.í”Œë ˆì´ 2.ìë™\nì…ë ¥:");
 	scanf("%d", &auto_bool);
 
 	Input_Disk(&Hanoi);
@@ -53,7 +53,7 @@ clock_t Hanoi_Main() {
 		return -3110;
 	}
 
-	printf("UI¸¦ °í¸£½Ê½Ã¿À 1.¼ıÀÚÇüÅÂ(1) 2.ºí·ÏÇüÅÂ(¡á)\nÀÔ·Â:");
+	printf("UIë¥¼ ê³ ë¥´ì‹­ì‹œì˜¤ 1.ìˆ«ìí˜•íƒœ(1) 2.ë¸”ë¡í˜•íƒœ(â– )\nì…ë ¥:");
 	scanf("%d", &n);
 	B_UI = n == 1 ? UI_NUM : UI_GRP;
 
@@ -64,11 +64,11 @@ clock_t Hanoi_Main() {
 			Print_Hanoi(Max, Stack);
 		else
 			GPrint_Hanoi(Max, Stack);
-		printf("\n\n¿Å±ä È½¼ö:%d\n", cnt);
+		printf("\n\nì˜®ê¸´ íšŸìˆ˜:%d\n", cnt);
 		if (m != 1 && Top[m] == Max)
 			break;
-		printf("¿Å±æ ¿øÆÇÀÇ À§Ä¡¿Í ¿øÆÇÀÇ ÃÖÁ¾ À§Ä¡¸¦ ÀÔ·ÂÇÏ¼¼¿ä ex)12 (ÈùÆ®(beta)´Â (00))"
-			"\nÀÔ·Â:");
+		printf("ì˜®ê¸¸ ì›íŒì˜ ìœ„ì¹˜ì™€ ì›íŒì˜ ìµœì¢… ìœ„ì¹˜ë¥¼ ì…ë ¥í•˜ì„¸ìš” ex)12 (íŒíŠ¸(beta)ëŠ” (00))"
+			"\nì…ë ¥:");
 		scanf("%1d%1d", &n, &m), getchar();
 
 		if (!(n || m)) {
@@ -81,7 +81,7 @@ clock_t Hanoi_Main() {
 			Move_Disk(&Hanoi, n, m);
 		}
 		else {
-			printf("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù");
+			printf("ì˜ëª»ëœ ê°’ì„ ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤");
 			getchar();
 			continue;
 		}
@@ -93,7 +93,7 @@ clock_t Hanoi_Main() {
 	return clock() - time_score;
 }
 
-//¿øÆÇ ¿Å±â±â
+//ì›íŒ ì˜®ê¸°ê¸°
 void Move_Disk(HANOI* Hanoi, int n, int m) {
 	int(*Stack)[MaxDisk] = Hanoi->Stack;
 	int* Top = Hanoi->Top;
@@ -101,19 +101,19 @@ void Move_Disk(HANOI* Hanoi, int n, int m) {
 	Stack[n][Top[n]--] = 0;
 }
 
-//¿øÆÇ ¡á·Î Ãâ·Â
+//ì›íŒ â– ë¡œ ì¶œë ¥
 void GPrint_Hanoi(int Max, int Stack[4][MaxDisk]) {
 	int i, j;
 	printf("\n\n\n\n\n");
 	for (i = Max; i > 0; i--) {
 		for (j = 1; j <= 55; j++) {
-			//Ãà
+			//ì¶•
 			if (!(j % 15))
 				printf("|");
 			else if (Aloc - Stack[1][i] <= j && j <= Aloc + Stack[1][i]
 					|| Bloc - Stack[2][i] <= j && j <= Bloc + Stack[2][i]
 					|| Cloc - Stack[3][i] <= j && j <= Cloc + Stack[3][i])
-				printf("¡á");
+				printf("â– ");
 			else
 				printf(" ");
 		}
@@ -121,7 +121,7 @@ void GPrint_Hanoi(int Max, int Stack[4][MaxDisk]) {
 	}
 }
 
-//¿øÆÇ ¼ıÀÚ·Î Ãâ·Â
+//ì›íŒ ìˆ«ìë¡œ ì¶œë ¥
 void Print_Hanoi(int Max, int Stack[4][MaxDisk]) {
 	int i, j;
 	for (i = Max; i > 0; i--) {
@@ -131,13 +131,13 @@ void Print_Hanoi(int Max, int Stack[4][MaxDisk]) {
 	}
 }
 
-//½Ã°£ ´ë±â¸¦ À§ÇÑ ÇÔ¼ö
+//ì‹œê°„ ëŒ€ê¸°ë¥¼ ìœ„í•œ í•¨ìˆ˜
 void sleep(long milli) {
 	clock_t end, current = clock();
 	for (end = current + milli; current < end; current = clock());
 }
 
-//ÀÚµ¿ ÇÏ³ëÀÌ!!!
+//ìë™ í•˜ë…¸ì´!!!
 void Auto_Hanoi(HANOI* Hanoi, int N, int Start, int To, int Via) {
 	if (N == 1) {
 		sleep(wait_second);
@@ -168,7 +168,7 @@ void Auto_Stack_Hanoi(HANOI* Hanoi) {
 			Stack[STop++][1] = N--;
 			Node += ((Node % 2) ? -1 : 1);
 		}
-		//sleep(wait_second);
+		sleep(wait_second);
 		system("cls");
 		GPrint_Hanoi(Hanoi->Max, Hanoi->Stack);
 		Move_Disk(Hanoi, s1[Node] / 10, s1[Node] % 10);
@@ -176,7 +176,7 @@ void Auto_Stack_Hanoi(HANOI* Hanoi) {
 			break;
 		Node = Stack[--STop][0];
 		N = Stack[STop][1] - 1;
-		//sleep(wait_second);
+		sleep(wait_second);
 		system("cls");
 		GPrint_Hanoi(Hanoi->Max, Hanoi->Stack);
 		Move_Disk(Hanoi, s1[Node] / 10, s1[Node] % 10);
@@ -189,7 +189,7 @@ int Hint_Hanoi(HANOI* Hanoi, int auto_list[]) {
 	int* Top = Hanoi->Top;
 	int keep[3] = { 0 };
 	int i, j;
-	// ¿òÁ÷ÀÏ ÆÇ °áÁ¤
+	// ì›€ì§ì¼ íŒ ê²°ì •
 	for (i = 1; i <= 3; i++) {
 		if (Top[i] > 1 && !((Stack[i][Top[i] - 1] - GET_TOP(i)) % 2)) {
 			keep[1] = i;
