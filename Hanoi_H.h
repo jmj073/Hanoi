@@ -19,6 +19,9 @@
 //자동 하노이 대기 밀리 세컨드
 #define wait_second 500
 
+// 대기를 위한 매크로
+#define wait_ent while(getchar() != '\n')
+
 //#define print_mecro sleep(wait_second); \
 //system("cls"); \
 //GPrint_Hanoi(Max, Stack); \
