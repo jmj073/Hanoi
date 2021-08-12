@@ -5,6 +5,14 @@
 #include <Windows.h>
 #include <time.h>
 
+#define GET_TOP(i) Stack[i][Top[i]]
+
+// getch 사용 여부
+#define USE_getch
+
+//힌트 옵션 사용 여부
+#define USE_HINT
+
 //■출력을 위한 좌표 설정
 //주의!!!!! 축은 세 좌표의 공약수(15)를 이용하게 되어있음! 검색(축)
 #define Aloc 15
@@ -21,11 +29,6 @@
 
 // 대기를 위한 매크로
 #define wait_ent while(getchar() != '\n')
-
-//#define print_mecro sleep(wait_second); \
-//system("cls"); \
-//GPrint_Hanoi(Max, Stack); \
-//Move_Disk(Stack, Top, Start, To); 
 
 //UI를 위한 선택!  그래픽의 약자!
 typedef enum { UI_NUM, UI_GRP }UI;

@@ -1,10 +1,5 @@
 #include "Hanoi_H.h"
 
-#define GET_TOP(i) Stack[i][Top[i]]
-
-// getch 사용 여부
-#define USE_getch
-
 //원판 개수 입력받기
 void Input_Disk(HANOI* Hanoi) {
 	int n;
@@ -73,7 +68,10 @@ clock_t Hanoi_Main() {
 		printf("\n\n옮긴 횟수:%d\n", cnt);
 		if (m != 1 && Top[m] == Max)
 			break;
-		printf("옮길 원판의 위치와 원판의 최종 위치를 입력하세요 ex)12 (힌트(beta)는 (00))"
+		printf("옮길 원판의 위치와 원판의 최종 위치를 입력하세요 ex)12" 
+#ifdef USE_HINT
+			"(힌트(beta)는 (00))"
+#endif
 			"\n입력:");
 #ifdef USE_getch
 		n = getch() - '0', m = getch() - '0';
@@ -81,13 +79,16 @@ clock_t Hanoi_Main() {
 		scanf("%1d%1d", &n, &m);
 		wait_ent;
 #endif
-		if (!(n || m)) {
+
+#ifdef USE_HINT
+		if (!(n || m))
 			m = Hint_Hanoi(&Hanoi, auto_list);
-		}
-		else if (1 <= n && n <= 3
-			&& 1 <= m && m <= 3
-			&& Stack[n][Top[n]]
-			&& (!GET_TOP(m) || GET_TOP(n) < GET_TOP(m))) {
+		else
+#endif
+		if (1 <= n && n <= 3
+				&& 1 <= m && m <= 3
+				&& GET_TOP(n)
+				&& (!GET_TOP(m) || GET_TOP(n) < GET_TOP(m))) {
 			Move_Disk(&Hanoi, n, m);
 		}
 		else {
@@ -96,9 +97,11 @@ clock_t Hanoi_Main() {
 			continue;
 		}
 		cnt++;
+#ifdef USE_HINT
 		if ((Stack[m][Top[m] - 1] - GET_TOP(m)) % 2 || Top[m] == 1)
 			Set_Auto_List(Max, auto_list);
 		auto_list[GET_TOP(m)] = GET_TOP(m);
+#endif
 	}
 	return clock() - time_score;
 }
@@ -149,13 +152,7 @@ void sleep(long milli) {
 
 //자동 하노이!!!
 void Auto_Hanoi(HANOI* Hanoi, int N, int Start, int To, int Via) {
-	if (N == 1) {
-		sleep(wait_second);
-		system("cls");
-		GPrint_Hanoi(Hanoi->Max, Hanoi->Stack);
-		Move_Disk(Hanoi, Start, To);
-	}
-	else {
+	if (N) {
 		Auto_Hanoi(Hanoi, N - 1, Start, Via, To);
 		sleep(wait_second);
 		system("cls");
@@ -173,15 +170,11 @@ void Auto_Stack_Hanoi(HANOI* Hanoi) {
 	char Node = 0;
 
 	while (1) {
-		while (N > 1) {
+		while (N) {
 			Stack[STop][0] = Node;
 			Stack[STop++][1] = N--;
 			Node += ((Node % 2) ? -1 : 1);
 		}
-		sleep(wait_second);
-		system("cls");
-		GPrint_Hanoi(Hanoi->Max, Hanoi->Stack);
-		Move_Disk(Hanoi, s1[Node] / 10, s1[Node] % 10);
 		if (!STop)
 			break;
 		Node = Stack[--STop][0];
